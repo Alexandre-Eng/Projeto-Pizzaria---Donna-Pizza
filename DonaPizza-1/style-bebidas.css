@@ -19,7 +19,6 @@
     --cinza-medio: #666666;
     --cinza-escuro: #444444;
 }
-
 * {
   margin: 0;
   padding: 0;
@@ -29,13 +28,16 @@
 
 body {
     color: white;
-    background-color: #ededed;
+    background-image:url(img_cardapios/bg-lightcardapio20.png); ;
     font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+     background-size: 100%;
 }
 
 body.dark {
-    background-color:var(--fundo-secundario);
+    background-image: url(img_cardapios/bg-darkcardapio.jpg);
     color: var(--darkverde);
+     background-size: 100%;
 }
 
 #container { /*ajuste de todo a disposição do conteudo no copor*/
@@ -57,6 +59,7 @@ header { /*cabeçalho*/
     height: 13vh;
     justify-content: space-around;
     align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 }
 
 header .logo {
@@ -136,67 +139,62 @@ header .menu .pecaagora:hover {
     transition: 0.2s;
 }
 
-header .DL { /*Inicio Acessibilidade modo D e L*/
-    justify-self: end;
-    margin-right: 5vh;
-}
-
-.DL .checkbox {
-    opacity: 0;
-    position: absolute;
-}
 
 
 
-
-.DL .label {
-    background-color: #000000;
-    border-radius: 50px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
+/* Estilo do toggle switch */
+.theme-switch {
     position: relative;
-    height: 26px;
-    width: 50px;
-    transform: scale(1.5);
+    display: inline-block;
+    width: 60px;
+    height: 34px;
 }
 
+.theme-switch input {
 
-.DL .label .ball{
-    background-color: #fcfafa;
-    border-radius: 50%;
+    width: 0;
+    height: 0;
+}
+
+.slider {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    height: 22px;
-    width: 22px;
-    transform: translateX(0px);
-    transition: transform 0.2s linear;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
 }
 
-
-.DL .checkbox:checked + .label .ball {
-      transform: translateX(24px);
-      background-color: #161414;
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
 }
-  
 
-.DL .fa-moon {
-    color: #f1c40f;
+input:checked + .slider {
+    background-color: #f32121;
 }
-  
-.DL .fa-sun {
-    color: #f39c12;
-} /*fim Acessibilidade modo D e L*/
 
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+ /*fim Acessibilidade modo D e L*/
+/* troca img para dark*/
 article {
     grid-area: article;
-    background-image: linear-gradient( rgba(0, 44, 42, 0.35)), url(img_cardapios/bg-lightcardapio.jpg);
+    background-image: linear-gradient( rgba(0, 44, 42, 0)), url(img_cardapios/bg-lightcardapio.jpg);
     background-repeat: repeat; /* Faz a imagem se repetir como um padrão */
     background-size: cover; /*contain'*/
-    font-size: 200%;
+    font-size:200%;
     font-weight: 800;
     padding: 11vh;
     display: flex;
@@ -205,7 +203,7 @@ article {
 }
 
 body.dark article {
-    background-image: linear-gradient( rgba(0, 44, 42, 0.35)), url(img_cardapios/bg-darkcardapio.jpg);
+    background-image: linear-gradient( rgba(0, 44, 42, 0)), url(img_cardapios/bg-darkcardapio.jpg);
     color: var(--branco-sutil);
 }
 
@@ -219,7 +217,7 @@ main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     
-    background-color:white;
+    background-color:var(--darkverde);
     gap: 4rem;
     max-width: 90vw;  
     border-radius: 8px;
@@ -228,7 +226,7 @@ main{
 }
 
 body.dark #containerbebidas {
-    background-color: var(--cinza-claro);
+    background-color: var(--darkverde);
 }
 
 #bebidas{
@@ -263,6 +261,12 @@ color: var(--darkverde);
     border-radius: 20%;
 }
 
+#bebidas a:hover{
+    transform: scale(1.2);
+    transition: 0.2s;
+}
+
+
 footer {
     grid-area: footer;
     max-width: 100vw;
@@ -282,13 +286,24 @@ footer .rodape img {
     width: 5rem;
     margin-bottom: 1rem;
 }
-
+footer .rodape p.dark {
+color: var(--branco-sutil);
+}
 footer .rodape p {
     line-height: 1.5;
     font-size: 13px;
+    color: var(--branco-sutil);
 }
+.imagem-pizza {
+  width: 100%;
+  max-width: 200px;
+  border-radius: 12px;
+  display: block;
+  margin: 0 auto 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);}
 
 @media screen and (max-width: 768px) {
+   
     header .menu nav {
         display: none;
     }
@@ -314,8 +329,9 @@ footer .rodape p {
         padding: 2rem 0rem 2rem 0rem;
       }
     
-      .hamburger {
+      header .hamburger {
         display: block;
+        
       }
 
     header .logo {
@@ -331,7 +347,7 @@ footer .rodape p {
         gap: 1.5rem;
     }
 
-    header .DL {
+    header .theme-switch-wrapper {
         margin-left: 1.2rem;
         display: flex;
         gap: 1rem;
@@ -343,4 +359,15 @@ footer .rodape p {
         max-width: 90vw;
         justify-content: center;
     }
+}
+
+ h1{
+color:black;}
+
+h3{ color: white;}
+p{
+    color: white;
+}
+.dark h1{
+color: white;
 }

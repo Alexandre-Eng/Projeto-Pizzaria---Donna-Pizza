@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verificar tema salvo
     const savedTheme = localStorage.getItem('theme');
     const isDark = savedTheme === 'dark';
-
+    
     // Aplicar tema inicial
     if (isDark) {
         body.classList.add('dark');
@@ -42,17 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener("DOMContentLoaded", function () {
+  const formLogin = document.querySelector("form");
 
-document.querySelector('.hamburger').addEventListener('click', function () {
-    document.querySelector('.nav').classList.toggle('active');
+  formLogin.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.querySelector("input[type='email']").value.trim();
+    const senha = document.querySelector("input[type='password']").value.trim();
+
+    const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+    const usuarioValido = usuarios.find(
+      usuario => usuario.email === email && usuario.senha === senha
+    );
+
+    if (usuarioValido) {
+      alert(`Bem-vindo, ${usuarioValido.nome}!`);
+      // Aqui você pode redirecionar para o cardápio, por exemplo:
+      window.location.href = "CARDAPIO.html";
+    } else {
+      alert("Email ou senha incorretos.");
+    }
+  });
 });
-
-
-const hamburger = document.querySelector('.hamburger'); //NAV-bAR
-const nav = document.querySelector('.nav');
-
-hamburger.addEventListener('click', () => {
-    nav.classList.toggle('active');
-});
-
-
